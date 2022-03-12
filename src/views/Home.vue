@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import BlogList from '@/components/blog/BlogList.vue';
+import List from '@/components/blog/List.vue';
 </script>
 
 <template>
-    <blog-list />
+    <div id="app">
+        <list />
+    </div>
 </template>
