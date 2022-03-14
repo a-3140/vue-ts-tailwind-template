@@ -1,0 +1,33 @@
+<script lang="ts">
+import { defineComponent, markRaw, watch } from 'vue'
+import DefaultLayout from './DefaultLayout.vue'
+import { useRoute } from 'vue-router'
+
+export default defineComponent({
+    setup() {
+        const layout = markRaw(DefaultLayout)
+        const route = useRoute()
+
+        watch(
+            () => route.meta,
+            async meta => {
+                try {
+                    const component = await import(/* @vite-ignore */`@/layouts/${meta.layout}.vue`)
+                    layout.value = component?.default || DefaultLayout
+                } catch (e) {
+                    layout.value = DefaultLayout
+                }
+            },
+            { immediate: true }
+        )
+        return { layout }
+    }
+})
+</script>
+
+<template>
+    <component :is="layout">
+        <slot />
+    </component>
+</template>
+

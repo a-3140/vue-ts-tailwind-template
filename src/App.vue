@@ -1,8 +1,16 @@
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent } from "vue";
+import AppLayout from "./layouts/AppLayout.vue";
+
+export default defineComponent({
+  components: { AppLayout }
+})
 </script>
 
 <template>
-  <router-view />
+  <AppLayout>
+    <router-view />
+  </AppLayout>
 </template>
 
 <style>
